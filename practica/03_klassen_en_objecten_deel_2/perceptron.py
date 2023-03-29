@@ -1,5 +1,7 @@
 import logging
 import numpy as np
+from graphviz import Source
+
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -25,6 +27,11 @@ class Perceptron:
     def __init__(self):
         self.weightVector = None
         self.bias = 0
+
+    def __str__(self):
+        path = 'perceptron.dot'
+        s = Source.from_file(path)
+        s.view()
 
     def initialize(self, nrOfFeatures):
         """Initialize w and b as zero"""

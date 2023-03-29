@@ -43,3 +43,4 @@ logging.debug(f"testInput2 : {testInput2}")
 
 prediction2 = orPerceptron.predict(testInput2)
 logging.info(f"Predicted y value : {prediction2}")
+logging.info(str(orPerceptron))
