@@ -118,15 +118,14 @@ def softmax(input):
         input (Numpy array): result of matmul first pass
     """
     # calculate denominator of softmax function
-    denominator = sum(math.e**i for i in input)
+    denominator = np.sum(math.e**input)
     # calculate softmax probabilities
-    softmax_output = np.array([[(math.e**i/denominator)[0] for i in input]])
+    softmax_output = np.array([(math.e**input/denominator)[0]])
     return softmax_output
 
 def cross_entropy_loss(yHat, y):
     # get number of samples
     N = yHat.shape[0]
-    ic(y, yHat, N)
     # calculate cross-entropy loss
     cel = -np.sum(y * np.log2(yHat))/N
     return cel
@@ -136,14 +135,11 @@ def cross_entropy_loss(yHat, y):
 
 
 # initialize weights at 1
-W = [np.ones_like(np.reshape(np.array(training_data[0]["img"]), (1, -1))) for i in range(2)]
-B = [0, 0]
-
+W = np.stack((np.ones_like(np.reshape(np.array(training_data[0]["img"]), (1, -1)))[0], np.ones_like(np.reshape(np.array(training_data[0]["img"]), (1, -1)))[0]), axis=0)
+B = np.array([[0, 0]])
 yTrain = np.array([y["label"] for y in training_data])
-# ic(yTrain)
 
 output = np.array([])
-# ic(f"output shape {output.shape[0]}")
 # loop over all training data
 for input in training_data:
     logits = []
@@ -151,14 +147,8 @@ for input in training_data:
     input = np.array(input["img"])
     # flatten input to feed to nn
     input = np.reshape(input, (1, -1))
-    ic(input)
-    for i, w in enumerate(W):
-        # first pass
-        result = np.reshape(np.matmul(input, w.T) + B[i], (1))
-        ic(result)
-        logits.append(result)
+    logits = np.matmul(input, W.T) + B
     softmax_prob = softmax(logits)
-    ic(softmax_prob)
     if output.shape[0] == 0:
         output = softmax_prob
     else:
