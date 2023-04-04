@@ -22,3 +22,5 @@ print(r)
 x[0][r] = 0.5
 
 print(x)
+
+print(np.random.randn(9, 2))
