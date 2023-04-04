@@ -78,6 +78,25 @@ class CrossEntropyLoss:
         # print result
         for i, y in enumerate(y_true):
             print(f"true_val = {y}, predicted_val = {np.round(y_pred[i], 3)}, loss = {(-np.sum(y*np.log2(y_pred[i]))):.2f}")
+        
+        return self
+
+# creating combined softmax activation and cross entropy loss class because of easier backward gradient
+class SoftmaxActivationCrossEntropyLoss:
+
+    def __init__(self) :
+        self.activation = SoftmaxActivation()
+        self.loss = CrossEntropyLoss()
+    
+    def forward(self, inputs, y_true):
+        # forward activation pass
+        self.activation.forward(inputs)
+        self.output = self.activation.output
+
+        # forward cross entropy loss pass
+        return self.loss.forward(self.output, y_true)
+
+
 
 # create training data
 X, y = get_training_data()
@@ -85,15 +104,9 @@ X, y = get_training_data()
 # initialize layer with 9 inputs and 2 outputs
 layer = Layer(9, 2)
 
-# initialize softmax activation
-softmax_activation = SoftmaxActivation()
-
-# initialize cross entropy loss
-cross_entropy_loss = CrossEntropyLoss()
+softmaxactivation_crossentropyloss = SoftmaxActivationCrossEntropyLoss()
 
 # forward pass
 layer.forward(X)
-softmax_activation.forward(layer.output)
-ic(softmax_activation.output)
-cross_entropy_loss.forward(softmax_activation.output, y)
-ic(cross_entropy_loss.loss)
+loss = softmaxactivation_crossentropyloss.forward(layer.output, y)
+ic(loss.loss)
