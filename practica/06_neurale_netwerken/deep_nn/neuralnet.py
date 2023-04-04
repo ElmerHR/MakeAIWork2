@@ -75,6 +75,10 @@ class CrossEntropyLoss:
         # calculate cross-entropy loss
         self.loss = -np.sum(y_true * np.log2(y_pred))/N
 
+        # print result
+        for i, y in enumerate(y_true):
+            print(f"true_val = {y}, predicted_val = {np.round(y_pred[i], 3)}, loss = {(-np.sum(y*np.log2(y_pred[i]))):.2f}")
+
 # create training data
 X, y = get_training_data()
 
@@ -87,13 +91,9 @@ softmax_activation = SoftmaxActivation()
 # initialize cross entropy loss
 cross_entropy_loss = CrossEntropyLoss()
 
-# make forward pass dense layer
+# forward pass
 layer.forward(X)
-
-# make forward pass softmax activation
 softmax_activation.forward(layer.output)
 ic(softmax_activation.output)
-
-# calculate loss
 cross_entropy_loss.forward(softmax_activation.output, y)
 ic(cross_entropy_loss.loss)
