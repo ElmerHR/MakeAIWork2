@@ -178,7 +178,9 @@ X, y = get_training_data()
 X_test, y_test = get_test_data()
 
 # initialize layer with 9 inputs and 2 outputs
-layer = Layer(9, 2)
+layer = Layer(9, 9)
+
+layer2 = Layer(9, 2)
 
 # initialize combined softmax activation and cross entropy loss function
 softmaxactivation_crossentropyloss = SoftmaxActivationCrossEntropyLoss()
@@ -192,28 +194,33 @@ for epoch in range(epochs):
     print(f"####### EPOCH {epoch} #######")
     # forward pass train
     layer.forward(X)
-    loss = softmaxactivation_crossentropyloss.forward(layer.output, y, True)
+    layer2.forward(layer.output)
+    loss = softmaxactivation_crossentropyloss.forward(layer2.output, y, True)
     ic(loss.loss)
 
     # backward pass train
     softmaxactivation_crossentropyloss.backward(softmaxactivation_crossentropyloss.output, y)
-    layer.backward(softmaxactivation_crossentropyloss.dinputs)
+    layer2.backward(softmaxactivation_crossentropyloss.dinputs)
+    layer.backward(layer2.dinputs)
 
     # forward pass test
     layer.forward(X_test)
-    loss_test = softmaxactivation_crossentropyloss.forward(layer.output, y_test)
+    layer2.forward(layer.output)
+    loss_test = softmaxactivation_crossentropyloss.forward(layer2.output, y_test)
     ic(loss_test.loss)
     save_losses.save_loss(loss.loss, loss_test.loss)
 
     # update weights and biases with optimizer
     optimizer = Optimizer(0.001)
     optimizer.update_params(layer)
+    optimizer.update_params(layer2)
 
 # make prediction
 print("######## PREDICTION ########")
 # forward pass
 layer.forward(X_test)
-loss = softmaxactivation_crossentropyloss.forward(layer.output, y_test, True)
+layer2.forward(layer.output)
+loss = softmaxactivation_crossentropyloss.forward(layer2.output, y_test, True)
 ic(loss.loss)
 
 # plotting loss functions of train and test data
@@ -232,3 +239,7 @@ save_losses.show_plot(epochs)
 #         "label": [1, 0]
 #         }
 # Although it is labeled as a cross, with some imagination you could also see it as a circle
+#
+# #### UPDATE ####
+# Adding a second dense layer, even without an activation function in between, already improves the performance
+# For sample 2, the prob improves to 0.963 from 0.669!!
