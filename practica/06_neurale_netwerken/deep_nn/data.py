@@ -1,4 +1,7 @@
 # create crosses and dots data
+# labeling:
+# [1, 0] --> cross
+# [0, 1] --> circle
 img01 = {
         "img": [[1, 0, 1],
                 [0, 1, 0],
