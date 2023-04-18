@@ -11,7 +11,7 @@ ic.configureOutput(includeContext=True)
 # Dense layer
 class Layer:
 
-    def __init__(self, n_inputs, n_neurons) -> None:
+    def __init__(self, n_inputs, n_neurons):
         # Initialize weights and biases
         self.n_inputs = n_inputs
         np.random.seed(42)
