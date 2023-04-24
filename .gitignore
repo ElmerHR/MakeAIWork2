@@ -148,16 +148,7 @@ projects/eurosat/src/package-lock.json
  ../.idea/
 projects/eurosat/.idea/
 projects/eurosat/data
-project/simpylc/simulations
-project/simpylc/default.samples
-project/simpylc/start_agent.sh
-project/simpylc/default.samples
-project/simpylc/generate_simulations.sh
-project/simpylc/start_agent.sh
-project/simpylc/start_client.sh
-project/simpylc/start_world.sh
-project/simpylc/test_agent.sh
-project/simpylc/test_client.sh
+
 **/mlruns
 **/output_notebooks
 **/models
