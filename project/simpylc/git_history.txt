@@ -1,0 +1,32 @@
+1fcc938 edited comments
+24403cf Project: unignore simulations folder
+3e9de75 Project: Adam with lidar track
+2928b7a Project: added Adam optimizer
+89f0875 Project: remove metric i am not using
+8d935f4 Project: analyzing runs
+7898dad Project: tweaking hyperparameters
+5f115f4 Project: added new runs to csv file
+dd7d371 manual driving
+d57c381 project: mlflow params edit
+3aabf55 Project: mlflow implementation
+8ae8897 Project: renamed notebook
+f387c20 Project: refactoring notebook
+c619200 Project: added Pytorch dataLoader
+1f10c19 project proof of concept
+d7ea963 backpropagation example ruud
+e990a1f Improved neural net with second extra dense layer
+fa4415e finalized neural net practicum
+c9dcdef combined softmax and cross entropy class
+62809b0 made output of cross entropy loss more readable
+e8acc58 Finished forward passes neural net
+927eea0 finalized naive implementation
+b28a8c8 Moving to full numpy on calculations
+b6b55f0 Created naive neural network
+94d3560 Exercise operator overloading
+5176ad6 Fixed logging practicum gradient descent
+7ee2405 Added solution to practicum gradient descent
+b0d90e4 Added orPerceptron and graphviz
+5570926 Added orPerceptron to classes practicum
+056f309 Added solution to perceptron exercise
+2ac6175 Added tetris refactoring exercise
+f63cd57 Added source
